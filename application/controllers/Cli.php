@@ -4,7 +4,7 @@
  * Controller to be called from CLI only
  * Reference: http://www.codeigniter.com/user_guide/general/cli.html
  */
-class Cli extends CI_Controller {
+class Cli extends MX_Controller {
 
 	// Constructor
 	public function __construct()
@@ -57,11 +57,13 @@ class Cli extends CI_Controller {
 		$this->load->database();
 
 		echo '====== Task: Empty database'.PHP_EOL;
+		/*
 		$this->db->truncate('cover_photos');
 		$this->db->truncate('blog_categories');
 		$this->db->truncate('blog_tags');
 		$this->db->truncate('blog_post_tag_rel');
 		$this->db->truncate('blog_posts');
+		*/
 		echo '====== Task: Empty database (Completed)'.PHP_EOL;
 	}
 
@@ -72,31 +74,17 @@ class Cli extends CI_Controller {
 		$this->load->helper('file');
 		$prefs = array('format' => 'txt');
 		
-		// Admin Users
-		$prefs['tables'] = array('admin_users');
+		// Ion Auth
+		$prefs['tables'] = array('groups', 'login_attempts', 'users', 'users_groups');
 		$backup = $this->dbutil->backup($prefs);
-		$file_path = FCPATH.'sql/core/admin_users.sql';
+		$file_path = FCPATH.'sql/core/ion_auth.sql';
 		write_file($file_path, $backup);
 		echo 'Database saved to: '.$file_path.PHP_EOL;
 		
-		// Frontend Users
-		$prefs['tables'] = array('users');
+		// Ion Auth (for Admin Panel)
+		$prefs['tables'] = array('admin_groups', 'admin_login_attempts', 'admin_users', 'admin_users_groups');
 		$backup = $this->dbutil->backup($prefs);
-		$file_path = FCPATH.'sql/core/users.sql';
-		write_file($file_path, $backup);
-		echo 'Database saved to: '.$file_path.PHP_EOL;
-
-		// Cover Photos
-		$prefs['tables'] = array('cover_photos');
-		$backup = $this->dbutil->backup($prefs);
-		$file_path = FCPATH.'sql/core/cover_photos.sql';
-		write_file($file_path, $backup);
-		echo 'Database saved to: '.$file_path.PHP_EOL;
-
-		// Blog
-		$prefs['tables'] = array('blog_posts', 'blog_categories', 'blog_tags', 'blog_post_tag_rel');
-		$backup = $this->dbutil->backup($prefs);
-		$file_path = FCPATH.'sql/core/blog.sql';
+		$file_path = FCPATH.'sql/core/ion_auth_admin.sql';
 		write_file($file_path, $backup);
 		echo 'Database saved to: '.$file_path.PHP_EOL;
 	}

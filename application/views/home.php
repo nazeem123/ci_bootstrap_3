@@ -1,3 +1,4 @@
-<?php $this->layout('layouts::default') ?>
 
-view: home.php
+<div class="container">
+	<p>view file: /application/views/home.php</p>
+</div>

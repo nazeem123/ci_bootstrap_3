@@ -18,7 +18,7 @@ class Sortable {
 	}
 
 	// Get items to be sorted
-	public function init($model, $order_field = 'pos')
+	public function init($model, $order_field = 'pos', $order_direction = 'ASC')
 	{
 		$this->CI->load->model($model, 'm');
 		$ids = $this->CI->input->post($this->mPostName);
@@ -37,7 +37,7 @@ class Sortable {
 		}
 
 		// return all records in sorted order
-		$this->CI->db->order_by($order_field, 'ASC');
+		$this->CI->db->order_by($order_field, $order_direction);
 		$items = $this->CI->m->get_all();
 		$this->mItems = $items;
 
@@ -53,7 +53,7 @@ class Sortable {
 		}
 		else
 		{
-			$html = box_open('Sort Order', 'primary');
+			$html = modules::run('adminlte/widget/box_open', 'Sort Order', 'primary');
 
 			// Render form with alert message
 			$html.= '<form action="'.current_full_url().'" method="POST">';
@@ -73,11 +73,11 @@ class Sortable {
 			$html.= $this->CI->parser->parse_string($template, $data, TRUE);
 
 			if ($back_url!=NULL)
-				$html.= btn('Back', $back_url, 'reply', 'bg-purple').' ';
+				$html.= modules::run('adminlte/widget/btn', 'Back', $back_url, 'fa fa-reply', 'bg-purple').' ';
 
-			$html.= btn_submit('Save');
+			$html.= modules::run('adminlte/widget/btn_submit', 'Save');
 			$html.= '</form>';
-			$html.= box_close();
+			$html.= modules::run('adminlte/widget/box_close');
 			return $html;
 		}
 	}

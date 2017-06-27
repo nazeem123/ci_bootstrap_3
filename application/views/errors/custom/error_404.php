@@ -1,3 +1,2 @@
-<?php $this->layout('layouts::default') ?>
-
-view: errors/custom/error_404.php
+<p>The page you requested was not found.</p>
+<p><a href="">Back to home page</a></p>

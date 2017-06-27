@@ -14,18 +14,17 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "browser-sync": "*",
     "del": "*",
     "gulp": "*",
     "gulp-changed": "*",
+    "gulp-clean-css": "*",
     "gulp-concat": "*",
-    "gulp-connect-php": "*",
     "gulp-imagemin": "*",
-    "gulp-minify-css": "*",
     "gulp-notify": "*",
+    "gulp-sass": "*",
     "gulp-sequence": "*",
     "gulp-sourcemaps": "*",
-    "gulp-uglifyjs": "*",
+    "gulp-uglify": "*",
     "gulp-watch": "*",
     "require-dir": "*"
   }
